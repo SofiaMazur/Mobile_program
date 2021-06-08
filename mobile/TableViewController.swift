@@ -71,27 +71,6 @@ class TableViewController: UITableViewController {
         task.resume()
     }
     
-    func sendRecipeRequest(of id: Int, completion: @escaping (RecipeItem?) -> Void) {
-                    
-        let apiKey = "84eea4c7dfbc48b5bae5a4cc60628ba6"
-        
-        let configuration = URLSessionConfiguration.default
-        let session = URLSession(configuration: configuration)
-        
-        var urlConstructor = URLComponents()
-        urlConstructor.scheme = "https"
-        urlConstructor.host = "api.spoonacular.com"
-        urlConstructor.path = "/recipes/\(id)/information"
-        urlConstructor.queryItems = [URLQueryItem(name: "apiKey", value: apiKey)]
-        
-        let task = session.dataTask(with: urlConstructor.url!) { (data, response, error) in
-            let result = try? JSONDecoder().decode(RecipeItem.self, from: data!)
-            completion(result ?? nil)
-        }
-        
-        task.resume()
-    }
-    
     func sendFilmsRequest(completion: @escaping (Films?) -> Void) {
                     
         let apiKey = "ce5f874b2bf3fe1f5c508a9d84c8063a"
